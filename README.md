@@ -8,3 +8,9 @@ as a tool for storytelling.
 
 The notebook contains sources for the data. Download that data to this
 directory under the directories 'temperature', 'glaciers', and 'energy'.
+
+TODO:
+
+[] Test in PyOdide
+[] Upload Arrow files
+[] Show Datagrid of OG data? Instead of the map scatter?

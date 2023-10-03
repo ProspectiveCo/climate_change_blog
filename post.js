@@ -9,17 +9,15 @@
 import perspective from "https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective.js";
 
 // TODO: use the final address here.
-const TEMPERATURE_DATA_URL = "http://localhost:8084/energy.arrow";
-const GLACIER_DATA_URL = "http://localhost:8084/temperature.arrow";
-const ENERGY_DATA_URL = "http://localhost:8084/glacier_daily_weather.arrow";
+const TEMPERATURE_DATA_URL = "http://localhost:8084/temperature.arrow";
+const GLACIER_DATA_URL = "http://localhost:8084/glacier_daily_weather.arrow";
+const ENERGY_DATA_URL = "http://localhost:8084/energy.arrow";
 
 const worker = perspective.worker();
 
-const temp_data = await (await fetch(TEMPERATURE_DATA_URL)).arrayBuffer();
-const temp_table = worker.table(temp_data);
 const pv1_layout = {
   filter: [['integer("time")', "==", 2022]],
-  columns: ["longitude", "latitude", '- "temperature"'],
+  columns: ["longitude", "latitude", '- "temperature"', null, null],
   expressions: ['integer("time")', '- "temperature"'],
   plugin: "Map Scatter",
 };
@@ -91,6 +89,9 @@ const pv5_layout = {
   plugin_config: { legend: { left: "56px", top: "10px" } },
 };
 
+const temp_data = await (await fetch(TEMPERATURE_DATA_URL)).arrayBuffer();
+const temp_table = worker.table(temp_data);
+
 const glacier_data = await (await fetch(GLACIER_DATA_URL)).arrayBuffer();
 const glacier_table = worker.table(glacier_data);
 
@@ -105,18 +106,14 @@ const pv5 = document.querySelector("#pv5");
 
 pv1.load(temp_table);
 await pv1.restore(pv1_layout);
-console.log("A");
 pv2.load(temp_table);
 await pv2.restore(pv2_layout);
-console.log("B");
 
 pv3.load(glacier_table);
-await pv2.restore(pv3_layout);
-console.log("C");
+await pv3.restore(pv3_layout);
 
 pv4.load(energy_table);
-await pv2.restore(pv4_layout);
-console.log("D");
+await pv4.restore(pv4_layout);
+
 pv5.load(energy_table);
-await pv2.restore(pv5_layout);
-console.log("E");
+await pv5.restore(pv5_layout);

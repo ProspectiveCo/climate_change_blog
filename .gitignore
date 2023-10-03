@@ -1,4 +1,3 @@
 venv/
-*.arrow
 .ipynb_checkpoints
 .DS_Store
