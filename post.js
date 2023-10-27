@@ -9,9 +9,12 @@
 import perspective from "https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective.js";
 
 // TODO: use the final address here.
-const TEMPERATURE_DATA_URL = "http://localhost:8084/temperature.arrow";
-const GLACIER_DATA_URL = "http://localhost:8084/glacier_daily_weather.arrow";
-const ENERGY_DATA_URL = "http://localhost:8084/energy.arrow";
+const TEMPERATURE_DATA_URL =
+  "https://prospectiveco.github.io/climate_change_blog/temperature.arrow";
+const GLACIER_DATA_URL =
+  "https://prospectiveco.github.io/climate_change_blog/glacier_daily_weather.arrow";
+const ENERGY_DATA_URL =
+  "https://prospectiveco.github.io/climate_change_blog/energy.arrow";
 
 const worker = perspective.worker();
 
